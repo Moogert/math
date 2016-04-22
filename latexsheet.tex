@@ -1,0 +1,549 @@
+\documentclass[8pt]{extarticle} % ...it lives! That's a useful ability...
+% OK, so I shrank everything to 8pt font; make sure this is readable! 
+% bear in mind that TMTOWTDI
+ % \documentclass[8pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath} % will this break anything? I sure hope not...
+\usepackage{hyperref}
+% I may want to:
+%   * shrink the font further (done) 
+%   * play around with the margins to get every last bit of space (done) 
+
+
+% To make this come out properly in landscape mode, do one of the following
+% 1.
+%  pdflatex latexsheet.tex
+%
+% 2.
+%  latex latexsheet.tex
+%  dvips -P pdf  -t landscape latexsheet.dvi
+%  ps2pdf latexsheet.ps
+
+
+% If you're reading this, be prepared for confusion.  Making this was
+% a learning experience for me, and it shows.  Much of the placement
+% was hacked in; if you make it better, let me know...
+
+
+% 2008-04
+% Changed page margin code to use the geometry package. Also added code for
+% conditional page margins, depending on paper size. Thanks to Uwe Ziegenhagen
+% for the suggestions.
+
+% 2006-08
+% Made changes based on suggestions from Gene Cooperman. <gene at ccs.neu.edu>
+
+
+% To Do:
+% \listoffigures \listoftables
+% \setcounter{secnumdepth}{0}
+% ...this isn't Jeffrey's to-do list, FYI
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}} % I, Jeffrey, have modified this. 
+	{ \geometry{top=.25in,left=.25in,right=.25in,bottom=.25in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
+% this does give me some more space...
+
+
+% Turn off header and footer
+\pagestyle{empty}
+ 
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+
+\raggedright
+\footnotesize
+\begin{multicols}{5} % this needs to be played with, I have a lot of stuff to squeeze into a small space! 
+% six columns seems to be a bit much, four gives everything some breathing room, 
+% five seems to be a pretty good place to be right now. This will be re-evaluated once I add everything in. 
+
+\newlength{\MyLen}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\textbf{Math 122L Cheat Sheet}} \\
+\end{center}
+
+\section{Pre-Calculus}
+\subsection*{Assorted}
+% \begin{multicols}{2} 
+$ x^{m/n}=\sqrt[n]{x^m}=\left(\sqrt[n]{x}\right)^m$ \\ 
+$\sqrt[n]{xy}=\sqrt[n]{x}\sqrt[n]{y}$ \\
+Sum of the squares of the first $n$ positive integers: 
+$\frac{n(n+1)(2n+1)}{6n^2}$ \\
+For every real number $x$, 
+$$\lim_{n \to \infty}\frac{x^n}{n!}=0$$ \\
+% \end{multicols}
+A function $f$ is \textbf{even }if $f(-x)=f(x)$ \\
+A function $f$ is \textbf{odd }if $f(-x)=-f(x)$ \\
+$$\lim_{x\to \infty}\tan^{-1}x=\frac{\pi}{2}$$ \\
+$$\lim_{x\to -\infty}\tan^{-1}x=-\frac{\pi}{2}$$ \\
+
+\subsection*{Trig Functions}
+% \begin{multicols}{2}
+$\csc\theta=\frac{1}{\sin\theta}$ \\
+$ \sec\theta=\frac{1}{\cos\theta}$ \\
+$1+\tan^2\theta=\sec^2\theta$ \\
+$1+\cot^2\theta=\csc^2\theta$ \\
+$\cos\theta=\cos(-\theta)$ \\
+$\tan\left( -theta\right)=-\tan\left(\theta\right) $ \\
+$\sin\left(\frac{\pi}{2}-\theta\right)=\cos\theta$ \\
+$\cos\left(\frac{\pi}{2}-\theta\right)=\sin\theta$ \\
+$\tan\left(\frac{\pi}{2}-\theta\right)=\cot\theta$ \\
+
+% \end{multicols}
+ $\sin(x+y)=\sin x\cos y+\cos x \sin y$\\ % this goes over the prescribed boundaries- I think I will put it outside the multicols environment. 
+ $\sin(x-y)=\sin x \cos y-\cos x \sin y$ \\ 
+ $\cos(x-y)=\cos x \cos y-\sin x \sin y$ \\ 
+ $ \tan(x+y)=\frac{\tan x -\tan y}{1+\tan x \tan y}$ \\
+ 
+ 
+\subsection{Trig Tables} 
+$\begin{array}{cccc} 
+ % x, sin, cos, tan
+x & \sin & \cos & \tan \\ \hline
+ 0 & 0 & 1 & 0 \\ 
+ \frac{pi}{6} & 0.5 & \frac{\sqrt{3}}{2} & \frac{1}{\sqrt{3}} \\
+ \frac{\pi}{4} & \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 1 \\
+ \frac{\pi}{3} & \frac{\sqrt{3}}{2} & 0.5 & \sqrt{3} \\
+ \frac{\pi}{2} & 1 & 0 & (undefined) \\
+ \end{array}
+$
+ 
+%  \section{Basic Differentiation Topics} 
+ % Do this later on
+\section{Derivatives and Other Fun Things} 
+ \subsection{L'Hospital's Rule}
+%  Suppose $f$ and $g$ are differentiable and $g'(x)\neq 0$ near $a$. Suppose $$\lim_{x\to a}f(x)=0\textrm{ and}\lim_{x\to a}g(x)=0 $$ 
+%  or $$\lim_{x\to a}f(x)=
+For some $f(x)$ and $g(x)$, if we have indeterminate forms of the type $\frac{0}{0}$, $\frac{\infty}{\infty}$, $0^0$, $\infty-\infty$, $\infty^0$, $1^\infty$  we can evaluate it as $$\lim_{x\to a} \frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)}$$ ...if the limit on the right side exists. 
+\subsection{The Definite Integral/Riemann Sums}
+The definite integral from $a$ to $b$ is defined as:
+$$\int_a^bf(x)dx=\lim_{n\to \infty}\sum_{i=1}^n f(x\mbox{*})\Delta x$$
+...where $x\mbox{*}$ is any point in the $i$th subinterval $[x_{i=1},x_i]$ and 
+$\Delta x=\frac{b-a}{n}$ and $x_i=a+i\Delta x$
+If the limit exists, the $f$ is \textit{integrable} on $[a,b]$. 
+% I could add some more stuff from 5.2 if there's space/I care/I don't run out of time/I have nothing else to do, no scenarios being especially plausible. 
+\subsection{Derivatives and Curves}
+% this is from section 4.3: 
+\textbf{The mean value theorem }states that, for some differentiable $f$ on the 
+interval $[a,b]$, there is a number $c$ such that
+$f'(c)=\frac{f(b)-f(a)}{b-a}$, or equivalently, 
+$f(b)-f(a)=f('(c)(b-a)$ \\ 
+\textbf{Concavity}for some $f(x)$ over $[a,b]$:
+\begin{enumerate}
+\item If $f''(x)>0$ for all $x$ in the interval, f is concave upward over interval. 
+\item If $f''(x)<0$ for all $x$ in the interval, f is concave downward over interval. 
+\end{enumerate}
+The \textbf{second derivative test} states that for some $f''$ continous near $c$: 
+\begin{enumerate}
+\item $f'(c)=0 and (f''(x)>0, f$ has a local minimum at $c$. 
+\item $f'(c)=0 and (f''(x)<0, f$ has a local maximum at $c$.  
+\end{enumerate}
+\textbf{Fundamental Theorem of Calculus (part 1)}: 
+If $f$ if continuous on $[a,b]$ and $a\leq x\leq b$, then 
+$g(x)=\int_a^xf(t)dt$ is an antiderivative of $f$. 
+\textbf{Fundamental Theorem of Calculus (part 2)}: 
+Supposing $f$ is continuous on $[a,b]$: 1
+\begin{enumerate}
+\item $g(x)=\int_a^xf(t)dt$, then $g'(x)=f(x)$ 
+\item $\int_a^bf(x)dx=F(b)-F(a)$, where $F$ is any antiderivative of $f$. 
+\end{enumerate}
+% Should I bother to try and clean up the formatting for this? I guess I'll just have to see how much space I have...
+% ...stopped this part at section 5.4
+
+\subsection{Antiderivatives}
+
+\begin{align*}
+\int \sec ^2 u du &= \tan u +C \\
+\int \csc ^2 u du &=-\cot u +C \\
+\int \tan u du &=\ln \left| \sec u \right| +C \\
+\int a^u du &=\frac{a^u}{\ln a}+C \\
+\int \sin ^2 y du&=\frac{1}{2}u -\frac{1}{4}\sin 2u +C \\
+\int \tan ^2 u du &=\tan u-u+C \\
+% Inverse trig time! 
+\int \sin^{-1}u du&=u \sin^{-1}u+\sqrt{1-u^2} \\
+\int \cos^{-1}u du&=u \cos^{-1}u+\sqrt{1-u^2} \\
+\int \tan ^{-1}u du&=u \tan ^{-1}u-\frac{1}{2}\ln (1+u^2)+C \\
+\int u dv&=uv-\int v du \\ % I don't like how this is spaced improperly, but it's not a huge deal right now...
+\int u \cos u du&=\cos u +u\sin u \\
+\int u \sin u du &=\sin u -u\cos u \\
+%
+\end{align*}
+
+\subsection{Derivatives} 
+\begin{align*}
+\frac{d}{dx}(\tan x)&=\sec^2 x \\
+\frac{d}{dx}(\cot x)&=-\csc^2x \\
+\frac{d}{dx} (\sec^{-1})&=\frac{1}{x\sqrt{x^2-1}} \\
+\frac{d}{dx}(\tan ^{-1}x)&=\frac{1}{1+x^2} \\
+\frac{d}{dx}(\cot ^{-1}x)&=-\frac{1}{1+x^2} \\
+\frac{d}{dx}(\sin^{-1} x)&=\frac{1}{\sqrt{1-x^2}} \\
+\frac{d}{dx}(\cos^{-1}x)&=-\frac{1}{\sqrt{1-x^2}} \\
+\frac{d}{dx}(a^x)&=a^x\ln a \\
+\frac{d}{dx}(\log_ax)&=\frac{1}{x\ln a} \\
+\frac{d}{dx}\left[\frac{f(x)}{g(x)}\right]&=\frac{g(x)f'(x)-f(x)g'(x)}{\left[ g(x)\right]^2}
+\end{align*}
+\subsection{Average Value}
+$$f_{ave}=\frac{1}{b-a}\int_a^bf(x)dx$$ 
+
+\subsection{Substitution Rule}
+
+If $g'$ is continuous on $[a,b]$ and $f$ is continuous on the range of $u=g(x)$, then
+$$\int_a^bf(g(x))g'(x)dx=\int^g(b)_{g(a)}f(u)du$$
+% this overflows its bounds. I gotta fix this somehow (shrink the font further?) 
+
+\subsection{Approximate Integration}
+
+\textbf{Midpoint rule:}
+$$\sum_{i=1}^n f(\bar{x_n}\Delta x$$
+where $\Delta x=\frac{b-a}{n}$ and 
+$\bar{x_n}=\frac{1}{2}(x_{n-1}+x_n)$, that is, the midpoint of $[x_{n-1},x_n] $
+The \textbf{trapezoidal rule:} add a left-hand sum and a right-hand sum and 
+divide both sides by two. % this is not very mathematical...
+\textbf{Error bounds:}
+ Suppose $\left|f''(x)\right|\leq K$
+for $a\leq x \leq b$. If $E_T$ and $E_M$
+are the errors in the Trapezoidal and Midpoint rules, then 
+
+$\left|E_T\right| leq\frac{K(b-a)^3}{12n^2}$  and % Does this need to be an equation? 
+$\left| E_M\right| \leq \frac{K(b-a)^3}{24n^2}$
+
+\textbf{Simpson's Rule:}
+$ S_n=\frac{\Delta}{3}[f(x_0)+4f(x_1)+2f(x_2)+4f(x_3)+...
++2f(x_{n-2})+4f(x_{n-1})+f(x_n)]$ 
+where $n$ is even and $\Delta x=\frac{b-a}{n}$ 
+
+The \textbf{error bound for Simpson's rule} for $ \left| f^{(4)}(x)\right| \leq K$ for $a\leq x\leq b$ is given as 
+$$\left| E_S \right|\leq \frac{K(b-a)^5}{180n^4}$$ 
+
+\subsection{Improper Integrals}
+
+% This is the definition of an improper integral of type 1 (as found on page (414)
+If $\int_a^bf(x)dx$ exists for every number $t\leq a$, then 
+$\int_a^\infty f(x)dx=\lim_{t\to \infty}\int_a^t f(x)dx$, provided the limit exists as a finite number. 
+
+If  $\int_t^b f(x)dx$ exists for every number $t\leq q$, then 
+$\int_{-\infty}^b f(x)dx=\lim_{t\to -\infty}\int_t^b f(x) dx$
+...provided this limit exists as a finite number. The integrals $\int_a^\infty f(x) dx$ and $\infty_-\infty^b f(x) dx$ are called \textbf{convergent} if the corresponding limit exists and \textbf{divergent} if the limit does not exist. 
+
+If both $\int_a^\infty f(x) dx$ and $\int_{-\infty}^af(x) dx$ are convergent, then we define
+$\int_{-\infty}^{\infty}f(x)dx=\int_{-\infty}^a f(x)dx+\int_a^\infty f(x)dx$ % is this readable? 
+Note that any real number can be used for $a$. 
+
+The improper integral $\int_1^\infty \frac{1}{x^p} dx$ is convergent if $p>1$ and divergent if
+$p\leq 1$. % is this necessary? Probably not...
+
+% Note that there is more to add with regards to improper integrals (particularly on page 418), but 
+% I think my time (and space) would be better spent working on the series stuff. 
+
+\section{Probability}
+The odds of a certain event happening (given $n$ chances) are given as \\
+$(\mbox{winning Odds})(\mbox{losing odds})^{n-1}$
+
+\subsection{PDFs}
+
+(...PDF standing for probability density function...) 
+Every continuous random variable $X$ has a \textbf{probability density function} $f$. 
+This means that the probability that $X$ lies between $a$ and $b$ is found by integrating $f$ from $a$ to $b$: 
+$$P(a\leq X \leq b)=\int_x^b f(x) dx$$
+
+For some PDF $f$, 
+$$\int_{-\infty}^{\infty}f(x) dx=1$$ % I think I can afford display mode 
+
+The \textbf{mean} of any probability density function $f$ (which can be interpreted as the long-range average of the random variable $X$) is defined to be 
+$$\mu=\int_{-\infty}^\infty xf(x)dx$$
+
+ \textbf{Average value} is given as $\sum_{i=1}^n p_i  x_i$\\
+
+\textbf{Expected value} is given as $\sum_{\mbox{all x}}x p(x)$, where $p(x)$ is the PDF 
+
+\subsection{Normal Distributions}
+
+Functions that can be modeled with a normal distribution have a PDF of the form
+$$f(x)=\frac{1}{\sigma \sqrt{2\pi}}e^{-(x-\mu)^2/(2\sigma^2)}$$
+...where $\sigma$ represents the \textbf{standard deviation}. 
+For any normal distribution,
+$$\int_{-\infty}^\infty \frac{1}{\sigma \sqrt{2\pi}}e^{-(x-\mu)^2/(2\sigma^2)}dx=1$$
+
+% section on expected value? yes, but I will come back to this
+
+
+
+\section{Center of Mass}
+Density of a circle whose density changes with radius: 
+$$\int_a^b2\pi xg(x)dx$$
+
+Center of mass: 
+$$\bar{x}=\frac{\mbox{Sum of Moments of Mass}}{\mbox{Total Mass}}$$
+...so, for a triangle with point masses of $5gm, 3gm,$ and $1gm$ at $x=-10, x=1, x=2$ :
+$$\bar{x}=\frac{5(-10)+3(1)+1(2)}{5+3+1}$$
+
+For a region $R$ of constant density $\delta$, the center of mass of $R$ is given by the point $(\bar{x},\bar{y},\bar{z})$: 
+$$\bar{x}=\frac{\int x \delta f(x)dx}{\textrm{Total Mass}}$$ \\
+$$\bar{y}=\frac{\int y \delta f(y)dy}{\textrm{Total Mass}}$$ \\
+$$\bar{z}=\frac{\int z \delta f(z)dz}{\textrm{Total Mass}}$$
+% this section should be finished. 
+
+
+\section{Series}
+% add sequences in if there's space? We really haven't spent much time with sequenes...
+\subsection{Convergence and Divergence}
+
+If the sequence $s_n$ is convergent and $\lim_{n\to\infty}s_n=s$ exists as a real number, then the 
+series $\sum a_n$ is \textbf{convergent}, that is, 
+$$\sum_{n=1}^\infty a_n=s$$
+If the sequence $s_n$ is \textbf{divergent}, then the series is divergent. 
+
+If the series $\sum_{n=1}^\infty a_n$ is convergent, then $\lim_{n\to \infty}a_n=0$ 
+\textbf{Note that the converse of this is not true in general}; if $\lim_{n\to \infty}a= 0$, we 
+cannot conclude that $\sum a_n$ is convergent. 
+
+\textbf{The test for divergence} states that if $\lim_{n\to \infty} a_n$ does not exist of if $\lim_{n\to \infty} a_n \neq 0$, then the series $\sum_{n=1}^\infty a_n$ is divergent. 
+
+% leaving out (for the sake of space) theorem 8 on oage 571
+
+% should I add something in about telescoping terms? 
+
+Sum of a geometric series: $$\sum_{n=1}^\infty ar^n=\frac{a}{1-r}\mbox{ for } \left| r \right| <1$$
+If $\left| r\right| \geq 1$, the series is divergent. 
+
+The \textbf{integral test} states that the for some continuous, positive $f$ decreasing on $[1,\infty)$, 
+and $a_n=f(n)$, then the series is convergent if and only if the improper integral 
+$\int_1^\infty f(x)dx$ is convergent. 
+
+The $p$-series, $\sum_{m=1}^\infty \frac{1}{n^p}$ is convergent if $p>1$ and divergent if $p\leq 1$
+
+\textbf{Comparison test:} Suppose that $\sum a_n$ and $\sum b_n$ are series with positive terms. 
+\begin{itemize} 
+\item If $\sum b_n$ is convergent and $a_n\leq b_n$ for all $n$, then $\sum a_n$ is also convergent. 
+\item If $\sum b_n$ is divergent and $a_n\geq b_n$ for all $n$, then $\sum a_n$ is also divergent. 
+\end{itemize}
+
+\textbf{The limit comparison test:} \\ % do I need to have a new line here? 
+Suppose that $\sum a_n$ and $\sum b_n$ are series with positive terms; if 
+$$\lim_{n\to \infty} \frac{a_n}{b_n}=c$$
+...where $c$ is a finite number and $c>0$, then either both series converge or both series diverge. 
+
+% skipping the remainder estimate for the integral test for now
+\textbf{The alternating series test:} \\
+If the series $\sum_{n=1}^\infty(-1)^{n-1}b_n$ (for $b_n>0$)
+satisfies the conditions 
+\begin{itemize}
+\item $b_{n+1}\leq b_n$ for all $n$
+\item $\lim_{n\to \infty} b_n=0$
+\end{itemize}
+
+...then the series is convergent. 
+
+\textbf{Alternating series estimation theorem:} \\
+If $s=\sum (-1)^{n-1}b_n$ is the sum of alternating series that satisfies the alternating series theorem, then
+$$\left|R_n\right|=\left| s-s _n\right| \leq 4b_{n+1}$$
+
+A series $\sum a_n$ is \textbf{absolutely convergent} if $\sum\left| a_n \right|$ is convergent. 
+If a series is absolutely convergent, then it is convergent. 
+
+The \textbf{ratio test} for a series $\sum_{n=1}^\infty a_n$ 
+where $\lim_{n\to \infty}\left|\frac{a_{n+1}}{a_n}\right|=L$
+\begin{enumerate}
+\item If $L<1$, then the series is absolutely convergent
+\item If $L>1$ or $L=\infty$, then the series is divergent
+\item If $L=1$, the ratio test is inconclusive
+\end{enumerate}
+
+\subsection{Power Series} 
+For a given power series $\sum^\infty_{n=0}c_n (x-a)^n$
+there are only three possibilities: 
+\begin{enumerate}
+\item The series converges only when $x=a$ 
+\item The series converges for all $x$ 
+\item There is a positive number $R$ such that the series converges if $\left| x-a\right|<R$ 
+and diverges if $\left| x-a \right|>R$. 
+\end{enumerate}
+...the number $R$ is called the \textbf{radius of convergence} of the power series. 
+
+
+
+
+
+\section{Center of Mass}
+Density of a circle whose density changes with radius: 
+$$\int_a^b2\pi xg(x)dx$$
+
+Center of mass: 
+$$\bar{x}=\frac{\mbox{Sum of Moments of Mass}}{\mbox{Total Mass}}$$
+...so, for a triangle with point masses of $5gm, 3gm,$ and $1gm$ at $x=-10, x=1, x=2$ :
+$$\bar{x}=\frac{5(-10)+3(1)+1(2)}{5+3+1}$$
+
+For a region $R$ of constant density $\delta$, the center of mass of $R$ is given by the point $(\bar{x},\bar{y},\bar{z})$: 
+$$\bar{x}=\frac{\int x \delta f(x)dx}{\textrm{Total Mass}}$$ \\
+$$\bar{y}=\frac{\int y \delta f(y)dy}{\textrm{Total Mass}}$$ \\
+$$\bar{z}=\frac{\int z \delta f(z)dz}{\textrm{Total Mass}}$$
+% this section should be finished. 
+
+\subsection{Functions as Power Series}
+The radius of convergence $R$ does not change when the power series is derived or integrated. 
+
+% Section 8.7 un in my book
+\subsection{Taylor's Theorem} states that if $f$ has a power series representation at $a$, that is, if 
+$$f(x)=\sum_{n=0}^\infty c_n(x-a)^n$$ where $\left| x-a\right|<R$ then its coefficients are given by the formula $c_n=\frac{f^(n)(a)}{n!}$
+
+A \textbf{Maclaurin series }is a Taylor series about $a=0$. 
+
+If $f(x)=T_n(x)+R_n(x)$, where $T_n$ is the $n$th-degree Taylor polynomial of $f$ at $a$ and
+$$\lim_{n\to \infty} R_n(x)=0$$
+for $\left| x-a \right| <R$, then $f$ is equal to the sum of its Taylor series on the interval 
+$\left| x-a \right|<R$. 
+
+% \textbf{Taylor's Remainder Theorem}: 
+\subsection{Taylor's Inequality:}
+ if $\left| f^{n+1}(x)\right| \leq M$, 
+% for $\left| x-a \right| \leq d$, 
+ then the remainder $R_n(x)$ of the Taylor series satisfies the inequality 
+$\left| R_n(x) \right|\leq \frac{M}{(n+1)!}\left| x-a\right| ^{n+1}$ 
+for $\left| x-a \right| \leq d$. 
+Find the largest possible value of $M$ within the range of $x$ values. Find the largest possible value of $x$ 
+when computing $\left| x-a \right|^{n+1}$
+
+% I might be able to shrink this down if I'm short on space
+
+% should I know about the binomial series? I need to ask Mike about this tonight! 
+\subsection{Important Maclaurin Series:}
+% setting this up as an array, could also do as a set of equations
+
+% Ought I to give the first few terms of each series? that might prove useful on the test...
+% ...yes, if there's room. 
+\begin{align*} 
+\frac{1}{1-x}&=\sum_{n=0}^\infty x^n \\
+e^x &=\sum_{n=0}^\infty \frac{x^n}{n!} \\ % can I add comments here? yes
+\sin x &=\sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{(xn+1)!} \\
+\cos x &=\sum_{n=0}^\infty (-1)^n \frac{x^{2n}}{(2n)!} \\
+\tan ^{-1} x&=\sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{2n+1} \\
+\ln (1+x)&=\sum_{n=1}\infty (-1)^{n-1} \frac{x^n}{n} \\
+% (1+x)^k=\sum^\infty_{n=0} % I don't really know how to use the binomial theorem thin
+% and I think I need to figure that out pretty soon...
+\end{align*}
+
+% Section 8.8
+Roots can be approximated using Taylor polynomials; for the cube root of $x$, 
+$f(x)=x^{1/3}$; we can treat this just as we would treat any other Taylor polynomial (by finding the coefficients with derivations).
+
+ 
+
+\section{Fourier Series}
+Functions with 
+periods $-\pi\leq x\leq \pi$.:
+% \textbf{Fourier series} have the form 
+% $$f(x)=
+$$a_0+\sum_{n=1}^\infty\left( a_n \cos nx+b_n \sin nx\right)$$ % fix formatting here? 
+% The name of the game is to find a function for the coeffecients. 
+
+$$a_0=\frac{1}{2\pi}\int_{-\pi}^\pi f(x)dx$$
+$$a_n=\frac{1}{\pi}\int_{-\pi}^\pi f(x)\cos nx dx$$
+$$b_n=\frac{1}{\pi}\int_{-\pi}^\pi f(x)\sin nx dx$$
+
+If $f$ is a piecewise continuous on $[-L,L]$, the Fourier series is defined as: 
+$$a_0+\sum_{n=1}^\infty\left[
+a_n\/cos \left(\frac{n\pi x}{L}\right)+
+b_n \sin\left(\frac{n \pi x}{L}\right)\right]
+$$
+% formatting is all weird, I'm going to have to deal with this a little later...
+% ...I might trying using fewer columns, we'll see how things are as far as space
+Coefficients are defined for $n\geq 1$ as
+$$a_0=\frac{1}{2L}\int_{-L}^L f(x) dx$$
+$$a_n=\frac{1}{L}\int_{-L}^L f(x) \cos \left( \frac{n\pi x}{L}\right)dx$$
+$$b_n=\frac{1}{L}\int_{-L}^L f(x) \sin \left( \frac{n\pi x}{L}\right)dx$$
+
+% If $f$ is a periodic function with period $2\pi$ and $f$ and $f'$ are piecewise continuous on $[-\pi,\pi]$, then the Fourier series is convergent.
+
+The \textbf{sum of the Fourier series }is equal to $f(x)$  at all numbers $x$ where $f$ is continuous. At the numbers $x$ where $f$ is discontinuous, the sum of the Fourier series is defined as
+$\frac{1}{2}\left[(x^+)+f(x^-)\right]$
+
+
+
+
+\section*{Differential Equations and Friends }
+\subsection*{Basics}
+% I skipped 7.2 of the book. 
+
+Differential Equations dictate the rate of change of a function. $\frac{dy}{dt}=k$ means the the function $y$ changes at a constant rate $k$. 
+
+A \textbf{separable equation }is a first-order differential equation in which the expressions can be factored as a function of $x$ times a function of $y$, that is, $\frac{dy}{dx}=g(x)f(y)$
+% \subsection*{Applications of Differential Equations}
+% Chapter 7.4 in book 
+\textbf{Euler's Method:}
+Approximate values for the solution of the initial-value problem $y=F(x,y),y(x_0)=y_0$, with step size $h$, at $x_n=x_{n-1}$ are given as 
+$$y_n=y_{n-1}+hF(x_{n-1},y_{n-1}), n=1,2,3...$$
+
+\iffalse 
+\begin{enumerate}
+\item Assume a function $\frac{dy}{dx}=f(x)$ with some given $y_0$ and a step size of $h$
+\item Add $h\times f(y_0)$ to $y_0$
+\item Repeat as needed; $y$ 
+\end{enumerate}
+\fi 
+The solution of the initial-value problem $\frac{dy}{dt}=ky$ where $y(0)=y_0$ is given  as $y(t)=y_0e^{kt}$
+
+Newton's Law of Cooling States that $\frac{PdT}{dt}=k(T-T_s)$, where $k$ is a constant, $T\mbox{ is the temperature and } T_0 \mbox{ is the original temperature.}$
+
+\subsection*{Population Growth Models}
+% This is chapter 7.5 in the book. 
+The logistic differential equation (one of the simplest models for logistic growth) is given as $$\frac{dP}{dt}=kP\left(1-\frac{P}{M}\right)$$ where $P$ is the population and $M$ is the carrying capacity. 
+
+The solution to the logistic equation is given as $P(t)=\frac{M}{1+Ae^{-kt}}\mbox{where } A=\frac{M-P_0}{P_0}$ 
+
+% 
+% Template originally created in 2014 by Winston Chang
+
+% \href{http://www.stdout.org/~winston/latex/}{http://www.stdout.org/$\sim$winston/latex/}
+
+
+\end{multicols}
+\end{document}
